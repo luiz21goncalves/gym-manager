@@ -16,15 +16,16 @@ module.exports = {
     const date = new Date(timestamp);
 
     const year = date.getUTCFullYear();
-    const month = date.getUTCMonth();
-    const day = date.getUTCDate();
+    const month = `0${date.getUTCMonth() + 1}`.slice(-2);
+    const day = `0${date.getUTCDate()}`.slice(-2);
 
     return {
       year,
       month,
       day,
       pt_bt: `${day}/${month}/${year}`,
-      birth: `${day}/${month}`
+      birth: `${day}/${month}`,
+      iso:`${year}-${month}-${day}`,
     }
   },
 };

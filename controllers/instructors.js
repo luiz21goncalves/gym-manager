@@ -53,3 +53,20 @@ exports.post = function(req, res) {
   });
 
 };
+
+exports.edit = function(req, res) {
+  const { id } = req.params
+
+  const foundInstructor = data.instructors.find(function(instructor) {
+    return instructor.id == id;
+  });
+
+  if (!foundInstructor) return res.send("Instrutor não encontrado");
+
+  const instructor = {
+    ...foundInstructor,
+    birth: date(foundInstructor.birth).iso,
+  }
+
+  return res.render("instructors/edit", { instructor });
+};
