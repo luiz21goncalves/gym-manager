@@ -135,7 +135,7 @@ header {
 
 /* ==== FORM ==== */
 
-input {
+input, select {
   width: 100%;
   color: #555;
   font-weight: bold;
