@@ -1,5 +1,17 @@
 {
-  "membres": [],
+  "members": [
+    {
+      "id": 1,
+      "avatar_url": "https://images.unsplash.com/photo-1514369118554-e20d93546b30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "name": "Luiz Gonçalves",
+      "email": "diara@lindinha.com.br",
+      "birth": 812332800000,
+      "gender": "F",
+      "blood": "B+",
+      "weigth": "70",
+      "heigth": "165"
+    }
+  ],
   "instructors": [
     {
       "id": 1,
@@ -9,15 +21,6 @@
       "gender": "F",
       "services": "Musculação, Crossfit, Dança",
       "created_at": 1584532419466
-    },
-    {
-      "id": 2,
-      "avatar_url": "https://images.unsplash.com/photo-1514369118554-e20d93546b30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-      "name": "Luiz Gonçalves",
-      "birth": 793670400000,
-      "gender": "F",
-      "services": "asfdasf, fdasfdas",
-      "created_at": 1584535267415
     },
     {
       "id": 3,

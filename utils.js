@@ -20,11 +20,11 @@ module.exports = {
     const day = `0${date.getUTCDate()}`.slice(-2);
 
     return {
-      year,
-      month,
       day,
+      month,
+      year,
       pt_bt: `${day}/${month}/${year}`,
-      birth: `${day}/${month}`,
+      birthDay: `${day}/${month}`,
       iso:`${year}-${month}-${day}`,
     }
   },
