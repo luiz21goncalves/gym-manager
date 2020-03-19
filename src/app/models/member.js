@@ -1,10 +1,10 @@
-const { age, date } = require("../../lib/utils");
+const { date } = require("../../lib/utils");
 const db = require("../../config/db");
 
 module.exports = {
   all(callback) {
     db.query(`SELECT * FROM members`, function(err, results) {
-      if (err) throw `Erro no Banco de dados! ${err}`;
+      if (err) throw `Databese Error! ${err}`;
       
       callback(results.rows);
     });
@@ -19,8 +19,9 @@ module.exports = {
         birth,
         blood,
         weigth,
-        heigth
-      ) VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8)
+        heigth,
+        instructor_id
+      ) VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING id
     `
     
@@ -32,18 +33,23 @@ module.exports = {
       date(data.birth).iso,
       data.blood,
       data.weigth,
-      data.heigth
+      data.heigth,
+      data.instructor
     ];
 
     db.query(query,values, function(err, results) {
-      if (err) throw `Erro no Banco de dados! ${err}`;
+      if (err) throw `Databese Error! ${err}`;
 
       callback(results.rows[0]);
     })
   },
   find(id, callback) {
-    db.query(`SELECT * FROM members WHERE id = $1`,[id], function(err, results) {
-      if (err) throw `Erro no Banco de dados! ${err}`;
+    db.query(`
+    SELECT members.*, instructors.name AS instructor_name
+    FROM members
+    LEFT JOIN instructors ON (members.instructor_id = instructors.id)
+    WHERE members.id = $1`,[id], function(err, results) {
+      if (err) throw `Databese Error! ${err}`;
       
       callback(results.rows[0]);
     });
@@ -58,8 +64,9 @@ module.exports = {
         email=($5),
         blood=($6),
         weigth=($7),
-        heigth=($8)
-      WHERE id = $9
+        heigth=($8),
+        instructor_id=($9)
+      WHERE id = $10
     `
 
     const values = [
@@ -71,11 +78,12 @@ module.exports = {
       data.blood,
       data.weigth,
       data.heigth,
+      data.instructor,
       data.id
     ];
 
     db.query(query, values, function(err, results) {
-      if (err) throw `Erro no Banco de dados! ${err}`;
+      if (err) throw `Databese Error! ${err}`;
     
       callback();
     });
@@ -83,9 +91,16 @@ module.exports = {
   },
   delete(id, callback) {
     db.query(`DELETE FROM members WHERE id = $1`, [id], function(err, results) {
-      if(err) throw `Erro no Banco de dados! ${err}`;
+      if(err) throw `Databese Error! ${err}`;
 
       return callback();
+    });
+  },
+  instructorSelectOptions(callback) {
+    db.query(`SELECT name, id FROM instructors`, function(err, results) {
+      if (err) throw `Databese Error! ${err}`;
+      
+      callback(results.rows)
     });
   }
 };

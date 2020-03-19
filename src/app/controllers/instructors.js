@@ -1,7 +1,6 @@
 const { age, date } = require("../../lib/utils");
 
 const Instructor = require("../models/instructor");
-
 module.exports = {
   index(req, res) {
     Instructor.all(function(instructors) {
@@ -42,6 +41,7 @@ module.exports = {
       instructor.birth = date(instructor.birth).iso;
       instructor.services = instructor.services.split(",");
       instructor.created_at = date(instructor.created_at).format;
+  
 
       return res.render("instructors/edit", { instructor })
     })
