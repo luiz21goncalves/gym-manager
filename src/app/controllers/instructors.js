@@ -1,5 +1,6 @@
-const Instructor = require("../models/instructor");
 const { age, date } = require("../../lib/utils");
+
+const Instructor = require("../models/instructor");
 
 module.exports = {
   index(req, res) {
@@ -20,7 +21,7 @@ module.exports = {
     }
 
     Instructor.create(req.body, function(instructor) {
-      return res.redirect(`/instructor/${instructor.id}`)
+      return res.redirect(`/instructors/${instructor.id}`)
     });    
   },
   show(req, res) {
